@@ -25,6 +25,9 @@
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
     <!-- Font Awesome cho icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- TikZJax cho vẽ hình -->
+    <link rel="stylesheet" type="text/css" href="https://tikzjax.com/v1/fonts.css">
+    <script src="https://tikzjax.com/v1/tikzjax.js"></script>
     <style>
         /* Tùy chỉnh nhỏ cho MathJax */
         mjx-container {
@@ -40,7 +43,7 @@
         <!-- Header -->
         <div class="bg-white rounded-2xl shadow-xl p-8 mb-6 border border-blue-100">
             <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-cyan-700 mb-3">
-                📝 TRẮC NGHIỆM ĐÚNG - SAI (6 CÂU)
+                📝 TRẮC NGHIỆM ĐÚNG - SAI: BÀI TOÁN THỂ TÍCH KHỐI TRÒN XOAY
             </h1>
             <div class="bg-blue-50/80 rounded-xl p-4 text-blue-800 border border-blue-200 flex items-start gap-3">
                 <i class="fas fa-info-circle text-blue-500 text-xl mt-0.5"></i>
@@ -49,26 +52,60 @@
                     <p class="text-sm mt-1">👉 Click vào nút <span class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-md border border-green-300 text-green-700 font-bold mx-1">Đ</span> hoặc <span class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-md border border-red-300 text-red-700 font-bold mx-1">S</span> để chọn. Nếu chọn đúng sẽ hiện <i class="fas fa-check-circle text-green-500"></i>, nếu sai sẽ hiện <i class="fas fa-times-circle text-red-500"></i>.</p>
                 </div>
             </div>
+            
+            <div class="mt-6 p-5 bg-gray-50 border border-gray-200 rounded-xl text-gray-800">
+                <h2 class="font-bold text-lg mb-2">Thông tin chung cho các câu hỏi:</h2>
+                <p class="mb-2">Trên bàn có một cốc nước hình trụ chứa đầy nước, có chiều cao trong bằng 3 lần đường kính trong của đáy; một viên bi hình cầu và một khối nón đều bằng thủy tinh. Biết viên bi và khối nón đều có đường kính bằng đường kính trong của cốc nước.</p>
+                <p>Người ta từ từ thả vào cốc nước viên bi và khối nón đó (như hình vẽ) thì thấy nước trong cốc tràn ra ngoài. Gọi $R$ là bán kính trong của đáy cốc nước.</p>
+                <div class="flex justify-center my-4">
+                    <script type="text/tikz">
+                        \begin{tikzpicture}[scale=0.7]
+                            \def\R{1.5}
+                            \def\H{9} 
+                            \def\ySphere{\R}
+                            \def\yConeApex{2*\R}
+
+                            % Cylinder back bottom
+                            \draw[dashed, thick, gray] (\R,0) arc (0:180:\R\space and 0.4);
+                            % Cylinder front bottom
+                            \draw[thick] (-\R,0) arc (180:360:\R\space and 0.4);
+                            % Cylinder sides
+                            \draw[thick] (-\R,0) -- (-\R,\H);
+                            \draw[thick] (\R,0) -- (\R,\H);
+                            % Cylinder top
+                            \draw[thick] (0,\H) ellipse (\R\space and 0.4);
+
+                            % Sphere
+                            \draw[thick] (0,\ySphere) circle (\R);
+                            \draw[dashed, thick, gray] (\R,\ySphere) arc (0:180:\R\space and 0.3);
+                            \draw[thick] (-\R,\ySphere) arc (180:360:\R\space and 0.3);
+
+                            % Cone
+                            \fill[gray!30, opacity=0.8] (0,\H) ellipse (\R\space and 0.4);
+                            \fill[gray!40, opacity=0.6] (-\R,\H) -- (0,\yConeApex) -- (\R,\H) -- cycle;
+                            \draw[thick] (-\R,\H) -- (0,\yConeApex) -- (\R,\H);
+                            \draw[dashed, thick, gray] (0,\H) -- (0,\yConeApex); 
+                            \draw[dashed, thick, gray] (-\R,\H) -- (\R,\H); 
+                        \end{tikzpicture}
+                    </script>
+                </div>
+            </div>
         </div>
 
-        <!-- Câu 1 (Giữ nguyên từ đề gốc) -->
+        <!-- Câu 1 -->
         <div class="bg-white rounded-2xl shadow-xl p-8 mb-6 border border-blue-100">
             <div class="flex items-start gap-3 mb-4">
                 <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">1</span>
                 <div class="text-lg text-gray-800 leading-relaxed">
-                    <span class="font-bold text-blue-800">Câu 1:</span> Cho hai biểu thức:<br>
-                    $A = \dfrac{2}{\sqrt{3}-1} - \sqrt{4-2\sqrt{3}}$ và $B = \left( \dfrac{\sqrt{x}}{\sqrt{x}-2} + \dfrac{\sqrt{x}}{\sqrt{x}+2} \right) \cdot \dfrac{x-4}{\sqrt{9x}}$ với $x > 0, x \neq 4$.
+                    <span class="font-bold text-blue-800">Câu 1:</span> Xét các kích thước và tính chất của cốc nước hình trụ ban đầu (tính theo $R$).
                 </div>
             </div>
-
-            <!-- Các mệnh đề a, b, c, d của Câu 1 -->
             <div class="space-y-4 mt-6" id="choiceGrid1">
-                <!-- a1 -->
                 <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="a1" data-correct="true">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">a</span>
-                            <div class="text-gray-800 pt-1">Rút gọn biểu thức $A$ ta được: $A=2$</div>
+                            <div class="text-gray-800 pt-1">Chiều cao trong của cốc nước là $h = 6R$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -77,12 +114,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- b1 -->
-                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="b1" data-correct="true">
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="b1" data-correct="false">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">b</span>
-                            <div class="text-gray-800 pt-1">Rút gọn biểu thức $B$ ta được: $B=\dfrac{2\sqrt{x}}{3}$</div>
+                            <div class="text-gray-800 pt-1">Diện tích đáy trong của cốc nước là $S_{\text{đáy}} = 2\pi R^2$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -91,12 +127,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- c1 -->
-                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="c1" data-correct="false">
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="c1" data-correct="true">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">c</span>
-                            <div class="text-gray-800 pt-1">Giá trị của biểu thức $B$ khi $x=4$ là: $B=\dfrac{4}{3}$</div>
+                            <div class="text-gray-800 pt-1">Thể tích của lượng nước ban đầu chứa đầy trong cốc là $V_{\text{trụ}} = 6\pi R^3$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -105,12 +140,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- d1 -->
-                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="d1" data-correct="false">
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="d1" data-correct="true">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">d</span>
-                            <div class="text-gray-800 pt-1">Có $8$ giá trị nguyên của $x$ thỏa mãn $A>B$</div>
+                            <div class="text-gray-800 pt-1">Diện tích xung quanh phần bên trong của cốc nước là $12\pi R^2$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -122,20 +156,20 @@
             </div>
         </div>
 
-        <!-- Câu 2 (Mới) -->
+        <!-- Câu 2 -->
         <div class="bg-white rounded-2xl shadow-xl p-8 mb-6 border border-blue-100">
             <div class="flex items-start gap-3 mb-4">
                 <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">2</span>
                 <div class="text-lg text-gray-800 leading-relaxed">
-                    <span class="font-bold text-blue-800">Câu 2:</span> Cho biểu thức $P = \dfrac{x\sqrt{x} - 8}{x - 2\sqrt{x}} - \dfrac{x\sqrt{x} + 8}{x + 2\sqrt{x}} + \dfrac{x+2}{\sqrt{x}}$ với $x>0, x \neq 4$.
+                    <span class="font-bold text-blue-800">Câu 2:</span> Xét các tính chất của viên bi hình cầu được thả vào cốc.
                 </div>
             </div>
             <div class="space-y-4 mt-6" id="choiceGrid2">
-                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="a2" data-correct="false">
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="a2" data-correct="true">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">a</span>
-                            <div class="text-gray-800 pt-1">Rút gọn $P$ ta được $P = \sqrt{x} - 2$</div>
+                            <div class="text-gray-800 pt-1">Bán kính của viên bi hình cầu bằng $R$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -148,7 +182,7 @@
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">b</span>
-                            <div class="text-gray-800 pt-1">Rút gọn $P$ ta được $P = \sqrt{x} + 2$</div>
+                            <div class="text-gray-800 pt-1">Thể tích của viên bi hình cầu là $V_{\text{cầu}} = \frac{4}{3}\pi R^3$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -161,7 +195,7 @@
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">c</span>
-                            <div class="text-gray-800 pt-1">Với $x = 9$, giá trị của $P$ là $P = 5$</div>
+                            <div class="text-gray-800 pt-1">Diện tích mặt cầu của viên bi là $S_{\text{cầu}} = \frac{4}{3}\pi R^2$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -170,11 +204,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="d2" data-correct="true">
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="d2" data-correct="false">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">d</span>
-                            <div class="text-gray-800 pt-1">Phương trình $P = 4$ có nghiệm $x = 4$</div>
+                            <div class="text-gray-800 pt-1">Khoảng cách từ đáy cốc đến điểm cao nhất của viên bi (khi nằm ở đáy cốc) là $R$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -186,20 +220,20 @@
             </div>
         </div>
 
-        <!-- Câu 3 (Mới) -->
+        <!-- Câu 3 -->
         <div class="bg-white rounded-2xl shadow-xl p-8 mb-6 border border-blue-100">
             <div class="flex items-start gap-3 mb-4">
                 <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">3</span>
                 <div class="text-lg text-gray-800 leading-relaxed">
-                    <span class="font-bold text-blue-800">Câu 3:</span> Cho hàm số $y = (m-2)x + 3$ (d). Xét các khẳng định sau:
+                    <span class="font-bold text-blue-800">Câu 3:</span> Xét các tính chất của khối nón được thả vào cốc (đáy nón nằm ở miệng cốc, đỉnh nón chạm vào viên bi).
                 </div>
             </div>
             <div class="space-y-4 mt-6" id="choiceGrid3">
-                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="a3" data-correct="true">
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="a3" data-correct="false">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">a</span>
-                            <div class="text-gray-800 pt-1">Với $m = 1$ thì (d) song song với đường thẳng $y = -x + 2$</div>
+                            <div class="text-gray-800 pt-1">Bán kính đáy của khối nón bằng $2R$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -208,11 +242,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="b3" data-correct="false">
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="b3" data-correct="true">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">b</span>
-                            <div class="text-gray-800 pt-1">Hàm số luôn đồng biến trên $\mathbb{R}$ với mọi $m$</div>
+                            <div class="text-gray-800 pt-1">Chiều cao của khối nón là $h_{\text{nón}} = 4R$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -225,7 +259,7 @@
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">c</span>
-                            <div class="text-gray-800 pt-1">Góc tạo bởi (d) và trục Ox là góc tù khi $m < 2$</div>
+                            <div class="text-gray-800 pt-1">Thể tích của khối nón là $V_{\text{nón}} = \frac{4}{3}\pi R^3$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -238,7 +272,7 @@
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">d</span>
-                            <div class="text-gray-800 pt-1">Khoảng cách từ gốc tọa độ đến (d) là $\dfrac{3}{\sqrt{(m-2)^2+1}}$</div>
+                            <div class="text-gray-800 pt-1">Độ dài đường sinh của khối nón là $l = R\sqrt{15}$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -250,12 +284,12 @@
             </div>
         </div>
 
-        <!-- Câu 4 (Mới) -->
+        <!-- Câu 4 -->
         <div class="bg-white rounded-2xl shadow-xl p-8 mb-6 border border-blue-100">
             <div class="flex items-start gap-3 mb-4">
                 <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">4</span>
                 <div class="text-lg text-gray-800 leading-relaxed">
-                    <span class="font-bold text-blue-800">Câu 4:</span> Cho đường tròn (O; R) và dây cung $AB = R\sqrt{3}$. Gọi H là trung điểm của AB.
+                    <span class="font-bold text-blue-800">Câu 4:</span> Xét lượng nước bị tràn ra và lượng nước còn lại trong cốc.
                 </div>
             </div>
             <div class="space-y-4 mt-6" id="choiceGrid4">
@@ -263,7 +297,7 @@
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">a</span>
-                            <div class="text-gray-800 pt-1">OH là khoảng cách từ O đến dây AB, $OH = \dfrac{R}{2}$</div>
+                            <div class="text-gray-800 pt-1">Tổng thể tích của viên bi và khối nón là $\frac{8}{3}\pi R^3$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -272,11 +306,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="b4" data-correct="false">
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="b4" data-correct="true">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">b</span>
-                            <div class="text-gray-800 pt-1">Số đo cung lớn AB bằng $120^\circ$</div>
+                            <div class="text-gray-800 pt-1">Thể tích nước tràn ra ngoài đúng bằng tổng thể tích của viên bi và khối nón.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -289,7 +323,7 @@
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">c</span>
-                            <div class="text-gray-800 pt-1">Độ dài đường tròn là $2\pi R$</div>
+                            <div class="text-gray-800 pt-1">Thể tích nước còn lại trong cốc là $\frac{10}{3}\pi R^3$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -302,7 +336,7 @@
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">d</span>
-                            <div class="text-gray-800 pt-1">Diện tích hình tròn là $\pi R^2$ nên diện tích hình quạt OAB bằng $\dfrac{\pi R^2}{3}$</div>
+                            <div class="text-gray-800 pt-1">Lượng nước tràn ra ngoài nhiều hơn lượng nước còn lại trong cốc.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -314,20 +348,20 @@
             </div>
         </div>
 
-        <!-- Câu 5 (Mới) -->
+        <!-- Câu 5 -->
         <div class="bg-white rounded-2xl shadow-xl p-8 mb-6 border border-blue-100">
             <div class="flex items-start gap-3 mb-4">
                 <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">5</span>
                 <div class="text-lg text-gray-800 leading-relaxed">
-                    <span class="font-bold text-blue-800">Câu 5:</span> Cho phương trình $x^2 - 2(m-1)x + m^2 - 3m = 0$ (với m là tham số).
+                    <span class="font-bold text-blue-800">Câu 5:</span> So sánh các đại lượng thể tích.
                 </div>
             </div>
             <div class="space-y-4 mt-6" id="choiceGrid5">
-                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="a5" data-correct="false">
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="a5" data-correct="true">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">a</span>
-                            <div class="text-gray-800 pt-1">Phương trình luôn có nghiệm với mọi $m$</div>
+                            <div class="text-gray-800 pt-1">Tỉ số thể tích của khối nón và viên bi là $1:1$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -340,7 +374,7 @@
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">b</span>
-                            <div class="text-gray-800 pt-1">Với $m=0$, phương trình có hai nghiệm phân biệt</div>
+                            <div class="text-gray-800 pt-1">Tỉ số thể tích của lượng nước còn lại trong cốc và lượng nước ban đầu là $\frac{5}{9}$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -349,11 +383,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="c5" data-correct="false">
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="c5" data-correct="true">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">c</span>
-                            <div class="text-gray-800 pt-1">Tích hai nghiệm bằng $m^2 - 3m$</div>
+                            <div class="text-gray-800 pt-1">Lượng nước tràn ra chiếm khoảng $44,44\%$ thể tích cốc ban đầu.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -362,11 +396,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="d5" data-correct="true">
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="d5" data-correct="false">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">d</span>
-                            <div class="text-gray-800 pt-1">Tổng hai nghiệm bằng $2(m-1)$</div>
+                            <div class="text-gray-800 pt-1">Thể tích nước còn lại gấp đôi thể tích viên bi.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -378,12 +412,12 @@
             </div>
         </div>
 
-        <!-- Câu 6 (Mới) -->
+        <!-- Câu 6 -->
         <div class="bg-white rounded-2xl shadow-xl p-8 mb-6 border border-blue-100">
             <div class="flex items-start gap-3 mb-4">
                 <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">6</span>
                 <div class="text-lg text-gray-800 leading-relaxed">
-                    <span class="font-bold text-blue-800">Câu 6:</span> Cho tam giác ABC vuông tại A, đường cao AH. Biết $AB = 6$ cm, $AC = 8$ cm.
+                    <span class="font-bold text-blue-800">Câu 6:</span> Giả sử ta thay đổi một số kích thước ban đầu.
                 </div>
             </div>
             <div class="space-y-4 mt-6" id="choiceGrid6">
@@ -391,7 +425,7 @@
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">a</span>
-                            <div class="text-gray-800 pt-1">Độ dài cạnh BC là $10$ cm</div>
+                            <div class="text-gray-800 pt-1">Nếu bán kính đáy cốc tăng lên 2 lần (chiều cao không đổi), thể tích cốc tăng lên 4 lần.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -400,11 +434,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="b6" data-correct="false">
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="b6" data-correct="true">
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">b</span>
-                            <div class="text-gray-800 pt-1">Độ dài đường cao AH là $4,8$ cm</div>
+                            <div class="text-gray-800 pt-1">Nếu chỉ thả viên bi vào cốc đầy nước, lượng nước tràn ra sẽ có thể tích bằng $\frac{4}{3}\pi R^3$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -417,7 +451,7 @@
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">c</span>
-                            <div class="text-gray-800 pt-1">$BH = 3,6$ cm, $CH = 6,4$ cm</div>
+                            <div class="text-gray-800 pt-1">Nếu chiều cao cốc là $h=4R$ và giữ nguyên các điều kiện bố trí khác, thể tích khối nón sẽ là $\frac{2}{3}\pi R^3$.</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -430,7 +464,7 @@
                     <div class="flex items-start justify-between gap-4">
                         <div class="flex items-start gap-3 flex-1">
                             <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">d</span>
-                            <div class="text-gray-800 pt-1">Tỉ số $\dfrac{HB}{HC} = \dfrac{9}{16}$</div>
+                            <div class="text-gray-800 pt-1">Tỉ số $\frac{5}{9}$ ở câu 5b sẽ thay đổi nếu ta thay đổi giá trị của $R$ (với điều kiện $h=6R$ vẫn giữ nguyên).</div>
                         </div>
                         <div class="flex items-center gap-2 shrink-0">
                             <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">Đ</button>
@@ -451,7 +485,7 @@
         </div>
 
         <!-- Khu vực giải thích tổng hợp -->
-        <div id="explanationBox" class="bg-white rounded-2xl shadow-xl p-8 border border-blue-100 hidden">
+        <div id="explanationBox" class="bg-white rounded-2xl shadow-xl p-8 border border-blue-100 hidden mt-6">
             <div class="flex items-center gap-3 mb-6">
                 <i class="fas fa-book-open text-blue-600 text-2xl"></i>
                 <h3 class="text-2xl font-bold text-blue-800">Lời giải chi tiết</h3>
@@ -464,226 +498,177 @@
 
     <script>
         (function() {
-            // Lời giải chi tiết cho từng ý của tất cả 6 câu
             const explanationParts = {
                 // Câu 1
                 a1: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 1a) Rút gọn A:</p>
-                        <p>\\[ A = \\frac{2}{\\sqrt{3}-1} - \\sqrt{4-2\\sqrt{3}} \\]</p>
-                        <p>\\[ = \\frac{2(\\sqrt{3}+1)}{(\\sqrt{3}-1)(\\sqrt{3}+1)} - \\sqrt{(\\sqrt{3}-1)^2} \\]</p>
-                        <p>\\[ = \\sqrt{3}+1 - |\\sqrt{3}-1| \\]</p>
-                        <p>Vì \\( \\sqrt{3} > 1 \\) nên \\( |\\sqrt{3}-1| = \\sqrt{3}-1 \\)</p>
-                        <p>\\[ = \\sqrt{3}+1 - (\\sqrt{3}-1) = 2 \\] → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 1a) Đúng</p>
+                        <p>Gọi $R$ là bán kính trong của đáy cốc. Đường kính trong của đáy là $2R$. Theo đề bài, chiều cao trong bằng 3 lần đường kính trong của đáy, nên $h = 3 \times (2R) = 6R$.</p>
                     </div>
                 `,
                 b1: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 1b) Rút gọn B:</p>
-                        <p>\\[ B = \\left( \\frac{\\sqrt{x}}{\\sqrt{x}-2} + \\frac{\\sqrt{x}}{\\sqrt{x}+2} \\right) \\cdot \\frac{x-4}{\\sqrt{9x}} \\] với \\(x>0, x \\ne 4\\)</p>
-                        <p>\\[ \\frac{\\sqrt{x}}{\\sqrt{x}-2} + \\frac{\\sqrt{x}}{\\sqrt{x}+2} = \\frac{\\sqrt{x}(\\sqrt{x}+2) + \\sqrt{x}(\\sqrt{x}-2)}{(\\sqrt{x}-2)(\\sqrt{x}+2)} = \\frac{2x}{x-4} \\]</p>
-                        <p>\\[ \\sqrt{9x} = 3\\sqrt{x} \\]</p>
-                        <p>\\[ B = \\frac{2x}{x-4} \\cdot \\frac{x-4}{3\\sqrt{x}} = \\frac{2\\sqrt{x}}{3} \\] → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 1b) Sai</p>
+                        <p>Diện tích đáy của hình trụ được tính bằng công thức $S_{\text{đáy}} = \pi R^2$, không phải $2\pi R^2$.</p>
                     </div>
                 `,
                 c1: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 1c) Giá trị B khi x = 4:</p>
-                        <p>Điều kiện xác định: \\(x > 0, x \\ne 4\\). Vì \\(x=4\\) không thỏa mãn ĐKXĐ, nên biểu thức B không xác định.</p>
-                        <p>Do đó khẳng định \\(B = \\frac{4}{3}\\) là <span class="inline-flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded"><i class="fas fa-times-circle"></i> Sai</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 1c) Đúng</p>
+                        <p>Thể tích cốc nước hình trụ là $V_{\text{trụ}} = S_{\text{đáy}} \times h = \pi R^2 \times 6R = 6\pi R^3$.</p>
                     </div>
                 `,
                 d1: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 1d) Số giá trị nguyên x thỏa mãn A > B:</p>
-                        <p>\\(A = 2\\), \\(B = \\frac{2\\sqrt{x}}{3}\\) (với \\(x>0, x\\ne 4\\)).</p>
-                        <p>Giải bất phương trình: \\(2 > \\frac{2\\sqrt{x}}{3} \\Rightarrow 3 > \\sqrt{x} \\Rightarrow 9 > x\\).</p>
-                        <p>Kết hợp ĐKXĐ: \\(0 < x < 9\\) và \\(x \\ne 4\\).</p>
-                        <p>Các giá trị nguyên: \\(x \\in \\{1,2,3,5,6,7,8\\}\\) (7 giá trị).</p>
-                        <p>Khẳng định "có 8 giá trị" là <span class="inline-flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded"><i class="fas fa-times-circle"></i> Sai</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 1d) Đúng</p>
+                        <p>Diện tích xung quanh hình trụ là $S_{xq} = 2\pi R h = 2\pi R \times 6R = 12\pi R^2$.</p>
                     </div>
                 `,
 
                 // Câu 2
                 a2: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 2a) Rút gọn P:</p>
-                        <p>\\[ P = \\frac{x\\sqrt{x} - 8}{x - 2\\sqrt{x}} - \\frac{x\\sqrt{x} + 8}{x + 2\\sqrt{x}} + \\frac{x+2}{\\sqrt{x}} \\]</p>
-                        <p>\\[ = \\frac{(\\sqrt{x}-2)(x+2\\sqrt{x}+4)}{\\sqrt{x}(\\sqrt{x}-2)} - \\frac{(\\sqrt{x}+2)(x-2\\sqrt{x}+4)}{\\sqrt{x}(\\sqrt{x}+2)} + \\frac{x+2}{\\sqrt{x}} \\]</p>
-                        <p>\\[ = \\frac{x+2\\sqrt{x}+4}{\\sqrt{x}} - \\frac{x-2\\sqrt{x}+4}{\\sqrt{x}} + \\frac{x+2}{\\sqrt{x}} \\]</p>
-                        <p>\\[ = \\frac{4\\sqrt{x}}{\\sqrt{x}} + \\frac{x+2}{\\sqrt{x}} = 4 + \\frac{x+2}{\\sqrt{x}} \\]</p>
-                        <p>Kết quả không phải \\(\\sqrt{x}-2\\) nên <span class="inline-flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded"><i class="fas fa-times-circle"></i> Sai</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 2a) Đúng</p>
+                        <p>Đề bài cho biết viên bi có đường kính bằng đường kính trong của cốc nước ($2R$). Do đó, bán kính của viên bi bằng $R$.</p>
                     </div>
                 `,
                 b2: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 2b) Rút gọn P (tiếp):</p>
-                        <p>Từ trên: \\(P = 4 + \\frac{x+2}{\\sqrt{x}} = \\frac{x+2+4\\sqrt{x}}{\\sqrt{x}} = \\frac{(\\sqrt{x}+2)^2}{\\sqrt{x}}\\)</p>
-                        <p>Không phải \\(\\sqrt{x}+2\\) nên <span class="inline-flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded"><i class="fas fa-times-circle"></i> Sai</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 2b) Đúng</p>
+                        <p>Thể tích của khối cầu bán kính $R$ được tính bằng công thức $V_{\text{cầu}} = \frac{4}{3}\pi R^3$.</p>
                     </div>
                 `,
                 c2: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 2c) Giá trị P tại x=9:</p>
-                        <p>\\(P = \\frac{(\\sqrt{9}+2)^2}{\\sqrt{9}} = \\frac{(3+2)^2}{3} = \\frac{25}{3} \\approx 8,33\\)</p>
-                        <p>Khẳng định \\(P=5\\) là <span class="inline-flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded"><i class="fas fa-times-circle"></i> Sai</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 2c) Sai</p>
+                        <p>Công thức tính diện tích mặt cầu là $S_{\text{cầu}} = 4\pi R^2$, không phải $\frac{4}{3}\pi R^2$.</p>
                     </div>
                 `,
                 d2: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 2d) Phương trình P=4:</p>
-                        <p>\\(\\frac{(\\sqrt{x}+2)^2}{\\sqrt{x}} = 4 \\Rightarrow (\\sqrt{x}+2)^2 = 4\\sqrt{x}\\)</p>
-                        <p>\\(\\Rightarrow x + 4\\sqrt{x} + 4 = 4\\sqrt{x} \\Rightarrow x = -4\\) (vô lý)</p>
-                        <p>Phương trình vô nghiệm, nên \\(x=4\\) không phải nghiệm → <span class="inline-flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded"><i class="fas fa-times-circle"></i> Sai</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 2d) Sai</p>
+                        <p>Viên bi nằm sát đáy cốc, điểm cao nhất của viên bi cách đáy một khoảng bằng đường kính của nó, tức là $2R$, không phải $R$.</p>
                     </div>
                 `,
 
                 // Câu 3
                 a3: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 3a) Với m=1: (d): y = -x+3. Đường thẳng y=-x+2 có hệ số góc bằng -1, cùng hệ số góc và khác tung độ gốc (3≠2) nên song song → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 3a) Sai</p>
+                        <p>Khối nón có đường kính bằng đường kính trong của cốc nước ($2R$), nên bán kính đáy của khối nón bằng $R$.</p>
                     </div>
                 `,
                 b3: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 3b) Hàm số đồng biến khi m-2>0 ⇔ m>2. Với m<2 hàm nghịch biến. Khẳng định "với mọi m" là <span class="inline-flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded"><i class="fas fa-times-circle"></i> Sai</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 3b) Đúng</p>
+                        <p>Đáy nón nằm ở miệng cốc, đỉnh nón chạm vào điểm cao nhất của viên bi. Chiều cao của cốc là $6R$, viên bi chiếm chiều cao $2R$ từ đáy. Do đó, chiều cao của khối nón là $h_{\text{nón}} = 6R - 2R = 4R$.</p>
                     </div>
                 `,
                 c3: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 3c) Góc tạo bởi (d) và Ox là góc tù khi hệ số góc a=m-2 <0 ⇔ m<2 → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 3c) Đúng</p>
+                        <p>Thể tích khối nón là $V_{\text{nón}} = \frac{1}{3}\pi R^2 h_{\text{nón}} = \frac{1}{3}\pi R^2 (4R) = \frac{4}{3}\pi R^3$.</p>
                     </div>
                 `,
                 d3: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 3d) Khoảng cách từ O(0,0) đến d: |c|/√(a²+b²) dạng ax+by+c=0. Viết lại (d): (m-2)x - y + 3 = 0 ⇒ d = |3|/√((m-2)²+1) → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 3d) Sai</p>
+                        <p>Độ dài đường sinh của khối nón là $l = \sqrt{R^2 + h_{\text{nón}}^2} = \sqrt{R^2 + (4R)^2} = \sqrt{17R^2} = R\sqrt{17}$.</p>
                     </div>
                 `,
 
                 // Câu 4
                 a4: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 4a) OH = ?</p>
-                        <p>OH ⊥ AB, H trung điểm AB ⇒ HA = R√3/2. ΔOHA vuông: OH = √(R² - 3R²/4) = R/2 → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 4a) Đúng</p>
+                        <p>Tổng thể tích của viên bi và khối nón là $V_{\text{vật}} = V_{\text{cầu}} + V_{\text{nón}} = \frac{4}{3}\pi R^3 + \frac{4}{3}\pi R^3 = \frac{8}{3}\pi R^3$.</p>
                     </div>
                 `,
                 b4: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 4b) Số đo cung lớn AB:</p>
-                        <p>sin(∠AOH) = AH/OA = (R√3/2)/R = √3/2 ⇒ ∠AOH=60° ⇒ ∠AOB=120° ⇒ cung nhỏ 120°, cung lớn 240° → <span class="inline-flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded"><i class="fas fa-times-circle"></i> Sai</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 4b) Đúng</p>
+                        <p>Vì cốc ban đầu chứa đầy nước, khi thả các vật chìm hoàn toàn vào cốc, thể tích nước tràn ra đúng bằng tổng thể tích của các vật chiếm chỗ.</p>
                     </div>
                 `,
                 c4: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 4c) Độ dài đường tròn: 2πR → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 4c) Đúng</p>
+                        <p>Thể tích nước còn lại trong cốc bằng thể tích ban đầu trừ đi thể tích nước tràn ra: $V_{\text{còn}} = V_{\text{trụ}} - V_{\text{vật}} = 6\pi R^3 - \frac{8}{3}\pi R^3 = \frac{10}{3}\pi R^3$.</p>
                     </div>
                 `,
                 d4: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 4d) Diện tích hình quạt OAB (cung nhỏ 120°): S = πR².120/360 = πR²/3 → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 4d) Sai</p>
+                        <p>Lượng nước tràn ra là $\frac{8}{3}\pi R^3$, lượng nước còn lại là $\frac{10}{3}\pi R^3$. Vì $\frac{8}{3} < \frac{10}{3}$ nên lượng nước tràn ra ít hơn lượng nước còn lại.</p>
                     </div>
                 `,
 
                 // Câu 5
                 a5: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 5a) Δ' = (m-1)² - (m²-3m) = m²-2m+1-m²+3m = m+1.</p>
-                        <p>Phương trình có nghiệm ⇔ m+1 ≥ 0 ⇔ m ≥ -1, không phải mọi m → <span class="inline-flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded"><i class="fas fa-times-circle"></i> Sai</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 5a) Đúng</p>
+                        <p>Thể tích khối nón là $\frac{4}{3}\pi R^3$ và thể tích viên bi cũng là $\frac{4}{3}\pi R^3$. Do đó tỉ số thể tích của chúng là $1:1$.</p>
                     </div>
                 `,
                 b5: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 5b) m=0 ⇒ Δ'=1>0, phương trình có 2 nghiệm phân biệt → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 5b) Đúng</p>
+                        <p>Tỉ số thể tích lượng nước còn lại và lượng nước ban đầu là: $\frac{V_{\text{còn}}}{V_{\text{trụ}}} = \frac{\frac{10}{3}\pi R^3}{6\pi R^3} = \frac{10}{18} = \frac{5}{9}$.</p>
                     </div>
                 `,
                 c5: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 5c) Tích hai nghiệm = c/a = m²-3m → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 5c) Đúng</p>
+                        <p>Tỉ lệ lượng nước tràn ra so với ban đầu là $\frac{8/3}{6} = \frac{4}{9} \approx 0,4444$ hay $44,44\%$.</p>
                     </div>
                 `,
                 d5: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 5d) Tổng hai nghiệm = -b/a = 2(m-1) → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 5d) Sai</p>
+                        <p>Thể tích nước còn lại là $\frac{10}{3}\pi R^3$, thể tích viên bi là $\frac{4}{3}\pi R^3$. Tỉ số là $\frac{10/3}{4/3} = 2,5$. Vậy nước còn lại gấp 2,5 lần thể tích viên bi, không phải gấp đôi.</p>
                     </div>
                 `,
 
                 // Câu 6
                 a6: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 6a) BC = √(6²+8²)=10 → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 6a) Đúng</p>
+                        <p>Thể tích hình trụ $V = \pi R^2 h$. Nếu $R$ tăng 2 lần thành $R' = 2R$ và $h$ không đổi, thì $V' = \pi (2R)^2 h = 4\pi R^2 h = 4V$. Thể tích tăng 4 lần.</p>
                     </div>
                 `,
                 b6: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 6b) AH = (AB.AC)/BC = 48/10=4,8 → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 6b) Đúng</p>
+                        <p>Nếu chỉ thả viên bi, thể tích nước tràn ra đúng bằng thể tích viên bi, tức là $\frac{4}{3}\pi R^3$.</p>
                     </div>
                 `,
                 c6: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 6c) BH = AB²/BC = 36/10=3,6; CH = AC²/BC = 64/10=6,4 → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 6c) Đúng</p>
+                        <p>Nếu $h=4R$, viên bi vẫn chiếm chiều cao $2R$. Chiều cao còn lại cho khối nón là $h_{\text{nón}} = 4R - 2R = 2R$. Khi đó thể tích khối nón là $V_{\text{nón}} = \frac{1}{3}\pi R^2 (2R) = \frac{2}{3}\pi R^3$.</p>
                     </div>
                 `,
                 d6: `
                     <div class="border-l-4 border-blue-500 pl-4 mb-4">
-                        <p class="font-bold text-blue-800 mb-2">Câu 6d) HB/HC = 3,6/6,4 = 9/16 → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                        <p class="font-bold text-blue-800 mb-2">Câu 6d) Sai</p>
+                        <p>Tỉ số $\frac{5}{9}$ được tính từ $\frac{\frac{10}{3}\pi R^3}{6\pi R^3}$. Biến $R^3$ bị triệt tiêu, do đó tỉ số này là một hằng số, không phụ thuộc vào giá trị cụ thể của $R$.</p>
                     </div>
                 `
             };
 
-            // Hàm hiển thị giải thích tổng hợp
             function renderFullExplanation() {
                 let html = '';
-                // Câu 1
-                html += '<h2 class="text-xl font-bold text-blue-800 mt-6 mb-2">Câu 1:</h2>';
-                html += explanationParts.a1;
-                html += explanationParts.b1;
-                html += explanationParts.c1;
-                html += explanationParts.d1;
-                html += '<hr class="my-6 border-blue-200">';
-                
-                // Câu 2
-                html += '<h2 class="text-xl font-bold text-blue-800 mt-6 mb-2">Câu 2:</h2>';
-                html += explanationParts.a2;
-                html += explanationParts.b2;
-                html += explanationParts.c2;
-                html += explanationParts.d2;
-                html += '<hr class="my-6 border-blue-200">';
-                
-                // Câu 3
-                html += '<h2 class="text-xl font-bold text-blue-800 mt-6 mb-2">Câu 3:</h2>';
-                html += explanationParts.a3;
-                html += explanationParts.b3;
-                html += explanationParts.c3;
-                html += explanationParts.d3;
-                html += '<hr class="my-6 border-blue-200">';
-                
-                // Câu 4
-                html += '<h2 class="text-xl font-bold text-blue-800 mt-6 mb-2">Câu 4:</h2>';
-                html += explanationParts.a4;
-                html += explanationParts.b4;
-                html += explanationParts.c4;
-                html += explanationParts.d4;
-                html += '<hr class="my-6 border-blue-200">';
-                
-                // Câu 5
-                html += '<h2 class="text-xl font-bold text-blue-800 mt-6 mb-2">Câu 5:</h2>';
-                html += explanationParts.a5;
-                html += explanationParts.b5;
-                html += explanationParts.c5;
-                html += explanationParts.d5;
-                html += '<hr class="my-6 border-blue-200">';
-                
-                // Câu 6
-                html += '<h2 class="text-xl font-bold text-blue-800 mt-6 mb-2">Câu 6:</h2>';
-                html += explanationParts.a6;
-                html += explanationParts.b6;
-                html += explanationParts.c6;
-                html += explanationParts.d6;
-                
+                for (let i = 1; i <= 6; i++) {
+                    html += `<h2 class="text-xl font-bold text-blue-800 mt-6 mb-2">Câu ${i}:</h2>`;
+                    html += explanationParts[`a${i}`];
+                    html += explanationParts[`b${i}`];
+                    html += explanationParts[`c${i}`];
+                    html += explanationParts[`d${i}`];
+                    if (i < 6) html += '<hr class="my-6 border-blue-200">';
+                }
                 return html;
             }
 
-            // Xử lý sự kiện click cho các nút Đ/S (cho tất cả các câu)
             const choiceItems = document.querySelectorAll('.choice-item');
             
             choiceItems.forEach(item => {
@@ -692,7 +677,6 @@
                 const resultIcon = item.querySelector('.result-icon');
                 const isCorrect = item.dataset.correct === 'true';
                 
-                // Hàm xóa trạng thái active của các nút trong cùng item
                 const resetButtons = () => {
                     trueBtn.classList.remove('bg-green-500', 'text-white', 'border-green-600');
                     trueBtn.classList.add('bg-white', 'text-green-600', 'border-green-400');
@@ -700,36 +684,30 @@
                     falseBtn.classList.add('bg-white', 'text-red-600', 'border-red-400');
                 };
                 
-                // Xử lý nút Đ
                 trueBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     resetButtons();
                     
                     if (isCorrect) {
-                        // Đúng: chọn Đ -> đúng
                         trueBtn.classList.remove('bg-white', 'text-green-600', 'border-green-400');
                         trueBtn.classList.add('bg-green-500', 'text-white', 'border-green-600');
                         resultIcon.innerHTML = '<i class="fas fa-check-circle text-green-500 text-2xl"></i>';
                     } else {
-                        // Sai: chọn Đ -> sai
                         trueBtn.classList.remove('bg-white', 'text-green-600', 'border-green-400');
                         trueBtn.classList.add('bg-red-500', 'text-white', 'border-red-600');
                         resultIcon.innerHTML = '<i class="fas fa-times-circle text-red-500 text-2xl"></i>';
                     }
                 });
                 
-                // Xử lý nút S
                 falseBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
                     resetButtons();
                     
                     if (!isCorrect) {
-                        // Sai: chọn S -> đúng
                         falseBtn.classList.remove('bg-white', 'text-red-600', 'border-red-400');
                         falseBtn.classList.add('bg-green-500', 'text-white', 'border-green-600');
                         resultIcon.innerHTML = '<i class="fas fa-check-circle text-green-500 text-2xl"></i>';
                     } else {
-                        // Đúng: chọn S -> sai
                         falseBtn.classList.remove('bg-white', 'text-red-600', 'border-red-400');
                         falseBtn.classList.add('bg-red-500', 'text-white', 'border-red-600');
                         resultIcon.innerHTML = '<i class="fas fa-times-circle text-red-500 text-2xl"></i>';
@@ -737,7 +715,6 @@
                 });
             });
 
-            // Xử lý nút xem giải thích
             const showBtn = document.getElementById('showExplanationBtn');
             const explanationBox = document.getElementById('explanationBox');
             const explanationContent = document.getElementById('explanationContent');
@@ -748,7 +725,6 @@
                     explanationBox.classList.remove('hidden');
                     showBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Ẩn giải thích';
                     
-                    // Render MathJax cho nội dung mới
                     if (window.MathJax) {
                         MathJax.typesetPromise([explanationContent]).catch(err => console.log(err));
                     }
