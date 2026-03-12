@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề thi trắc nghiệm tương tác - Tailwind + MathJax</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- MathJax cấu hình -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true,
+                packages: {'[+]': ['noerrors']}
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            },
+            loader: {load: ['[tex]/noerrors']}
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+    <!-- Font Awesome cho icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Tùy chỉnh nhỏ cho MathJax */
+        mjx-container {
+            font-size: 1.1em;
+        }
+        .choice-item {
+            transition: all 0.2s;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen py-8 px-4">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-6 border border-blue-100">
+            <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-cyan-700 mb-3">
+                📝 TRẮC NGHIỆM ĐÚNG - SAI
+            </h1>
+            <div class="bg-blue-50/80 rounded-xl p-4 text-blue-800 border border-blue-200 flex items-start gap-3">
+                <i class="fas fa-info-circle text-blue-500 text-xl mt-0.5"></i>
+                <div>
+                    <p class="font-medium">Các khẳng định (a, b, c, d) có thể đúng hoặc sai.</p>
+                    <p class="text-sm mt-1">👉 Click vào nút <span class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-md border border-green-300 text-green-700 font-bold mx-1">Đ</span> hoặc <span class="inline-flex items-center gap-1 bg-white px-2 py-0.5 rounded-md border border-red-300 text-red-700 font-bold mx-1">S</span> để chọn. Nếu chọn đúng sẽ hiện <i class="fas fa-check-circle text-green-500"></i>, nếu sai sẽ hiện <i class="fas fa-times-circle text-red-500"></i>.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Đề bài -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-6 border border-blue-100">
+            <div class="flex items-start gap-3 mb-4">
+                <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">?</span>
+                <div class="text-lg text-gray-800 leading-relaxed">
+                    <span class="font-bold text-blue-800">Câu:</span> Cho hai biểu thức:<br>
+                    $A = \dfrac{2}{\sqrt{3}-1} - \sqrt{4-2\sqrt{3}}$ và $B = \left( \dfrac{\sqrt{x}}{\sqrt{x}-2} + \dfrac{\sqrt{x}}{\sqrt{x}+2} \right) \cdot \dfrac{x-4}{\sqrt{9x}}$ với $x > 0, x \neq 4$.
+                </div>
+            </div>
+
+            <!-- Các mệnh đề a, b, c, d -->
+            <div class="space-y-4 mt-6" id="choiceGrid">
+                <!-- a -->
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="a" data-correct="true">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex items-start gap-3 flex-1">
+                            <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">a</span>
+                            <div class="text-gray-800 pt-1">Rút gọn biểu thức $A$ ta được: $A=2$</div>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <!-- Nút Đ (Đúng) -->
+                            <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">
+                                Đ
+                            </button>
+                            <!-- Nút S (Sai) -->
+                            <button class="btn-false w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-red-400 text-red-600 hover:bg-red-50 transition-all flex items-center justify-center" data-action="false">
+                                S
+                            </button>
+                            <!-- Icon kết quả -->
+                            <div class="result-icon w-8 h-8 flex items-center justify-center text-2xl">
+                                <!-- Sẽ được điền bằng JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- b -->
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="b" data-correct="true">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex items-start gap-3 flex-1">
+                            <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">b</span>
+                            <div class="text-gray-800 pt-1">Rút gọn biểu thức $B$ ta được: $B=\dfrac{2\sqrt{x}}{3}$</div>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">
+                                Đ
+                            </button>
+                            <button class="btn-false w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-red-400 text-red-600 hover:bg-red-50 transition-all flex items-center justify-center" data-action="false">
+                                S
+                            </button>
+                            <div class="result-icon w-8 h-8 flex items-center justify-center text-2xl"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- c -->
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="c" data-correct="false">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex items-start gap-3 flex-1">
+                            <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">c</span>
+                            <div class="text-gray-800 pt-1">Giá trị của biểu thức $B$ khi $x=4$ là: $B=\dfrac{4}{3}$</div>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">
+                                Đ
+                            </button>
+                            <button class="btn-false w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-red-400 text-red-600 hover:bg-red-50 transition-all flex items-center justify-center" data-action="false">
+                                S
+                            </button>
+                            <div class="result-icon w-8 h-8 flex items-center justify-center text-2xl"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- d -->
+                <div class="choice-item bg-gray-50 rounded-xl p-4 border-2 border-gray-200 hover:border-blue-300 transition-all" data-choice="d" data-correct="false">
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="flex items-start gap-3 flex-1">
+                            <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg shrink-0">d</span>
+                            <div class="text-gray-800 pt-1">Có $8$ giá trị nguyên của $x$ thỏa mãn $A>B$</div>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <button class="btn-true w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-green-400 text-green-600 hover:bg-green-50 transition-all flex items-center justify-center" data-action="true">
+                                Đ
+                            </button>
+                            <button class="btn-false w-12 h-12 rounded-xl font-bold text-xl bg-white border-2 border-red-400 text-red-600 hover:bg-red-50 transition-all flex items-center justify-center" data-action="false">
+                                S
+                            </button>
+                            <div class="result-icon w-8 h-8 flex items-center justify-center text-2xl"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút xem giải thích -->
+            <div class="mt-8 flex justify-end">
+                <button id="showExplanationBtn" class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-2 text-lg">
+                    <i class="fas fa-lightbulb"></i>
+                    Xem giải thích chi tiết
+                </button>
+            </div>
+        </div>
+
+        <!-- Khu vực giải thích -->
+        <div id="explanationBox" class="bg-white rounded-2xl shadow-xl p-8 border border-blue-100 hidden">
+            <div class="flex items-center gap-3 mb-6">
+                <i class="fas fa-book-open text-blue-600 text-2xl"></i>
+                <h3 class="text-2xl font-bold text-blue-800">Lời giải chi tiết</h3>
+            </div>
+            <div id="explanationContent" class="prose prose-blue max-w-none text-gray-700 space-y-4">
+                <!-- Nội dung sẽ được chèn bằng JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Lời giải chi tiết cho từng ý
+            const explanationParts = {
+                a: `
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <p class="font-bold text-blue-800 mb-2">a) Rút gọn A:</p>
+                        <p>\\[ A = \\frac{2}{\\sqrt{3}-1} - \\sqrt{4-2\\sqrt{3}} \\]</p>
+                        <p>\\[ = \\frac{2(\\sqrt{3}+1)}{(\\sqrt{3}-1)(\\sqrt{3}+1)} - \\sqrt{(\\sqrt{3}-1)^2} \\]</p>
+                        <p>\\[ = \\sqrt{3}+1 - |\\sqrt{3}-1| \\]</p>
+                        <p>Vì \\( \\sqrt{3} > 1 \\) nên \\( |\\sqrt{3}-1| = \\sqrt{3}-1 \\)</p>
+                        <p>\\[ = \\sqrt{3}+1 - (\\sqrt{3}-1) = 2 \\] → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                    </div>
+                `,
+                b: `
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <p class="font-bold text-blue-800 mb-2">b) Rút gọn B:</p>
+                        <p>\\[ B = \\left( \\frac{\\sqrt{x}}{\\sqrt{x}-2} + \\frac{\\sqrt{x}}{\\sqrt{x}+2} \\right) \\cdot \\frac{x-4}{\\sqrt{9x}} \\] với \\(x>0, x \\ne 4\\)</p>
+                        <p>\\[ \\frac{\\sqrt{x}}{\\sqrt{x}-2} + \\frac{\\sqrt{x}}{\\sqrt{x}+2} = \\frac{\\sqrt{x}(\\sqrt{x}+2) + \\sqrt{x}(\\sqrt{x}-2)}{(\\sqrt{x}-2)(\\sqrt{x}+2)} = \\frac{2x}{x-4} \\]</p>
+                        <p>\\[ \\sqrt{9x} = 3\\sqrt{x} \\]</p>
+                        <p>\\[ B = \\frac{2x}{x-4} \\cdot \\frac{x-4}{3\\sqrt{x}} = \\frac{2\\sqrt{x}}{3} \\] → <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 px-2 py-1 rounded"><i class="fas fa-check-circle"></i> Đúng</span></p>
+                    </div>
+                `,
+                c: `
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <p class="font-bold text-blue-800 mb-2">c) Giá trị B khi x = 4:</p>
+                        <p>Điều kiện xác định: \\(x > 0, x \\ne 4\\). Vì \\(x=4\\) không thỏa mãn ĐKXĐ, nên biểu thức B không xác định.</p>
+                        <p>Do đó khẳng định \\(B = \\frac{4}{3}\\) là <span class="inline-flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded"><i class="fas fa-times-circle"></i> Sai</span></p>
+                    </div>
+                `,
+                d: `
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <p class="font-bold text-blue-800 mb-2">d) Số giá trị nguyên x thỏa mãn A > B:</p>
+                        <p>\\(A = 2\\), \\(B = \\frac{2\\sqrt{x}}{3}\\) (với \\(x>0, x\\ne 4\\)).</p>
+                        <p>Giải bất phương trình: \\(2 > \\frac{2\\sqrt{x}}{3} \\Rightarrow 3 > \\sqrt{x} \\Rightarrow 9 > x\\).</p>
+                        <p>Kết hợp ĐKXĐ: \\(0 < x < 9\\) và \\(x \\ne 4\\).</p>
+                        <p>Các giá trị nguyên: \\(x \\in \\{1,2,3,5,6,7,8\\}\\) (7 giá trị).</p>
+                        <p>Khẳng định "có 8 giá trị" là <span class="inline-flex items-center gap-1 bg-red-100 text-red-700 px-2 py-1 rounded"><i class="fas fa-times-circle"></i> Sai</span></p>
+                    </div>
+                `
+            };
+
+            // Hàm hiển thị giải thích
+            function renderFullExplanation() {
+                let html = '';
+                html += explanationParts.a;
+                html += '<hr class="my-6 border-blue-200">';
+                html += explanationParts.b;
+                html += '<hr class="my-6 border-blue-200">';
+                html += explanationParts.c;
+                html += '<hr class="my-6 border-blue-200">';
+                html += explanationParts.d;
+                return html;
+            }
+
+            // Xử lý sự kiện click cho các nút Đ/S
+            const choiceItems = document.querySelectorAll('.choice-item');
+            
+            choiceItems.forEach(item => {
+                const trueBtn = item.querySelector('.btn-true');
+                const falseBtn = item.querySelector('.btn-false');
+                const resultIcon = item.querySelector('.result-icon');
+                const isCorrect = item.dataset.correct === 'true';
+                
+                // Hàm xóa trạng thái active của các nút trong cùng item
+                const resetButtons = () => {
+                    trueBtn.classList.remove('bg-green-500', 'text-white', 'border-green-600');
+                    trueBtn.classList.add('bg-white', 'text-green-600', 'border-green-400');
+                    falseBtn.classList.remove('bg-red-500', 'text-white', 'border-red-600');
+                    falseBtn.classList.add('bg-white', 'text-red-600', 'border-red-400');
+                };
+                
+                // Xử lý nút Đ
+                trueBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    resetButtons();
+                    
+                    if (isCorrect) {
+                        // Đúng: chọn Đ -> đúng
+                        trueBtn.classList.remove('bg-white', 'text-green-600', 'border-green-400');
+                        trueBtn.classList.add('bg-green-500', 'text-white', 'border-green-600');
+                        resultIcon.innerHTML = '<i class="fas fa-check-circle text-green-500 text-2xl"></i>';
+                    } else {
+                        // Sai: chọn Đ -> sai
+                        trueBtn.classList.remove('bg-white', 'text-green-600', 'border-green-400');
+                        trueBtn.classList.add('bg-red-500', 'text-white', 'border-red-600');
+                        resultIcon.innerHTML = '<i class="fas fa-times-circle text-red-500 text-2xl"></i>';
+                    }
+                });
+                
+                // Xử lý nút S
+                falseBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    resetButtons();
+                    
+                    if (!isCorrect) {
+                        // Sai: chọn S -> đúng
+                        falseBtn.classList.remove('bg-white', 'text-red-600', 'border-red-400');
+                        falseBtn.classList.add('bg-green-500', 'text-white', 'border-green-600');
+                        resultIcon.innerHTML = '<i class="fas fa-check-circle text-green-500 text-2xl"></i>';
+                    } else {
+                        // Đúng: chọn S -> sai
+                        falseBtn.classList.remove('bg-white', 'text-red-600', 'border-red-400');
+                        falseBtn.classList.add('bg-red-500', 'text-white', 'border-red-600');
+                        resultIcon.innerHTML = '<i class="fas fa-times-circle text-red-500 text-2xl"></i>';
+                    }
+                });
+            });
+
+            // Xử lý nút xem giải thích
+            const showBtn = document.getElementById('showExplanationBtn');
+            const explanationBox = document.getElementById('explanationBox');
+            const explanationContent = document.getElementById('explanationContent');
+
+            showBtn.addEventListener('click', function() {
+                if (explanationBox.classList.contains('hidden')) {
+                    explanationContent.innerHTML = renderFullExplanation();
+                    explanationBox.classList.remove('hidden');
+                    showBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Ẩn giải thích';
+                    
+                    // Render MathJax cho nội dung mới
+                    if (window.MathJax) {
+                        MathJax.typesetPromise([explanationContent]).catch(err => console.log(err));
+                    }
+                } else {
+                    explanationBox.classList.add('hidden');
+                    showBtn.innerHTML = '<i class="fas fa-lightbulb"></i> Xem giải thích chi tiết';
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
